@@ -2,9 +2,7 @@
 
 import React from "react";
 import Autoplay from "embla-carousel-autoplay";
-import { IoCalendarClearOutline } from "react-icons/io5";
 
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -14,11 +12,23 @@ import {
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { useGetProgamAcara } from "@/useCase/ProgamAcaraUseCase";
+import { ProgamAcaraSection } from "./section";
 
 const HomepageFeature = () => {
   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: false }),
   );
+
+  const [value, setValue] = React.useState("");
+  const [page, setPage] = React.useState(1);
+  const [limit, setLimit] = React.useState(4);
+
+  const { data: dataProgam, isLoading: isLoadingProgam } = useGetProgamAcara({
+    value,
+    page,
+    limit,
+  });
 
   const HERO_CARAUSEL = [
     {
@@ -28,24 +38,6 @@ const HomepageFeature = () => {
     {
       title: "Kolaborasi dengan Komunitas, Membangun Ekosistem Digital di Solo",
       image: "/images/hero-2.jpg",
-    },
-  ];
-
-  const PROGAM_ACARA = [
-    {
-      title: "JIHAD PAGI",
-      image: "/images/progam-acara-jihad.png",
-      date: "October 6,2022",
-    },
-    {
-      title: "JIHAD PAGI",
-      image: "/images/progam-acara-jihad.png",
-      date: "October 6,2022",
-    },
-    {
-      title: "JIHAD PAGI",
-      image: "/images/progam-acara-jihad.png",
-      date: "October 6,2022",
     },
   ];
 
@@ -111,86 +103,44 @@ const HomepageFeature = () => {
           </CarouselContent>
         </Carousel>
       </section>
-      <section className="container mb-10 mt-5">
-        <h2 className="pb-2 text-3xl font-bold">PROFIL PERSADA FM</h2>
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-          <Image
-            src="/images/profil-persada-fm.png"
-            alt="Profil Persada FM"
-            width={500}
-            height={500}
-            className="col-span-1 h-full w-full object-cover "
-          />
-          <p className="col-span-2 font-medium">
-            RADIO PERSADA FM adalah sebuah perusahaan yang berkedudukan dan
-            berkantor di Jl. Raden Qosim (Kawasan Sunan Drajat) Paciran
-            Lamongan, Jawa Timur No. Tlp. (0322) 662970, 662261 Fax. (0322)
-            662261 dengan format siar Radio yang dikembangkan adalah Radio
-            hiburan, informasi, pendidikan dan dakwah, dengan menyajikan
-            musik-musik popular terkini dan penyampaian informasi yang cepat,
-            actual dengan standart mutu signifikan menduduki urutan teratas
-            prioritas pelayanan pada customer, adalah landasan yang berkiprah di
-            masa sekarang maupun akan daring.
-          </p>
-        </div>
-      </section>
-
-      <section className="bg-[#F7EEDD] py-10">
-        <h2 className="pb-5 text-center text-3xl font-bold">Progam Acara</h2>
-        <div className="container relative grid grid-cols-1 gap-10 md:grid-cols-2">
-          <div className="rounded-lg bg-white">
-            <Image
-              src="/images/progam-acara-base.png"
-              alt="Program Acara"
-              width={1000}
-              height={500}
-              className="rounded-t-lg"
-            />
-            <div className="flex flex-col gap-3 px-10 pb-4 pt-2">
-              <h3 className="text-xl font-semibold">MUTIARA KATA BERMAKNA</h3>
-              <div className="flex items-center gap-1 font-medium">
-                <IoCalendarClearOutline className="h-6 w-6" />
-                <p>October 6,2022</p>
-              </div>
-              <p className="text-lg font-medium">
-                Rekaman pembacaan brosur Pengajian Ahad Pagi yang sayang jika
-                Anda lewatkan. Hadir selama dua kali sehari untuk menambah
-                wawasan Anda
-              </p>
+      <section className="container py-10">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-10">
+          <div className="space-y-3">
+            <h2 className="pb-2 text-xl font-bold md:text-3xl">
+              PROFIL PERSADA FM
+            </h2>
+            <div className="h-[280px]">
+              <Image
+                src="/images/profil-persada-fm.png"
+                alt="Profil Persada FM"
+                width={500}
+                height={500}
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <p className="text-justify text-sm font-medium md:text-base">
+              RADIO PERSADA FM adalah sebuah perusahaan yang berkedudukan dan
+              berkantor di Jl. Raden Qosim (Kawasan Sunan Drajat) Paciran
+              Lamongan, Jawa Timur No. Tlp. (0322) 662970, 662261 Fax. (0322)
+              662261 dengan format siar Radio yang dikembangkan adalah Radio
+              hiburan, informasi, pendidikan dan dakwah, dengan menyajikan
+              musik-musik popular terkini dan penyampaian informasi yang cepat,
+              actual dengan standart mutu signifikan menduduki urutan teratas
+              prioritas pelayanan pada customer, adalah landasan yang berkiprah
+              di masa sekarang maupun akan daring.
+            </p>
+          </div>
+          <div className="bg-[#F7EEDD]">
+            <div className="flex h-9 w-full items-center justify-center bg-sky-400 md:h-[52px]">
+              <h2 className="pb-2 text-lg font-medium md:text-2xl">
+                LIVE STREAMING
+              </h2>
             </div>
           </div>
-          <div className="flex flex-col gap-4">
-            {PROGAM_ACARA.map((item, index) => (
-              <div key={index} className="rounded-lg bg-white">
-                <div className="grid h-[120px] max-h-[120px] grid-cols-3">
-                  <div className="relative col-span-1">
-                    <Image
-                      src="/images/progam-acara-jihad.png"
-                      alt="Program Acara"
-                      width={500}
-                      height={500}
-                      className="absolute h-full w-full rounded-l-lg object-cover"
-                    />
-                  </div>
-
-                  <div className="col-span-2 flex flex-col items-start justify-center gap-2 px-2">
-                    <h3 className="text-lg font-semibold uppercase">
-                      {item.title}
-                    </h3>
-                    <div className="flex items-center gap-1 font-medium">
-                      <IoCalendarClearOutline className="h-5 w-5" />
-                      <p>{item.date}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-            <Button className="w-[80%] self-end bg-sky-500 hover:bg-sky-500/80">
-              LIHAT PROGRAM ACARA LAINNYA
-            </Button>
-          </div>
         </div>
       </section>
+
+      <ProgamAcaraSection isLoading={isLoadingProgam} data={dataProgam} />
 
       <section className="container my-10 flex flex-col gap-4">
         <h2 className="pb-5 text-center text-3xl font-bold">Jadwal Acara</h2>

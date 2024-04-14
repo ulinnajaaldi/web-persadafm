@@ -14,19 +14,19 @@ const Footer = () => {
       content: [
         {
           title: "Yayasan MTA",
-          href: "https://mtatv.co.id",
+          href: "https://mta.or.id/",
         },
         {
           title: "Pemuda MTA",
-          href: "https://pemudamta.org",
+          href: "https://pemuda.mta.or.id/",
         },
         {
           title: "Ponpes MTA",
-          href: "https://ponpesmta.org",
+          href: "https://www.mta.ponpes.id/",
         },
         {
           title: "SMA MTA",
-          href: "https://smamta.org",
+          href: "https://www.smamta-ska.sch.id/",
         },
       ],
     },
@@ -35,31 +35,23 @@ const Footer = () => {
       content: [
         {
           title: "Website MTATV",
-          href: "https://mtatv.co.id",
+          href: "http://mtatv.net/v2/",
         },
         {
           title: "Download mp3",
-          href: "https://mtatv.co.id",
-        },
-        {
-          title: "Download Brosur",
-          href: "https://mtatv.co.id",
+          href: "http://mp3.mtafm.com/",
         },
         {
           title: "Youtube MTATV",
-          href: "https://www.youtube.com/user/mtatv",
-        },
-        {
-          title: "Instagram MTATV",
-          href: "https://www.instagram.com/mtatv/",
+          href: "https://www.youtube.com/user/OfficialMTATV",
         },
         {
           title: "Facebook MTATV",
-          href: "https://www.facebook.com/mtatv/",
+          href: "https://web.facebook.com/mtatvofficial/?_rdc=1&_rdr",
         },
         {
           title: "Alamat Kajian MTA",
-          href: "https://mtatv.co.id",
+          href: "https://mta.or.id/alamat/",
         },
       ],
     },
