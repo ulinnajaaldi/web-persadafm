@@ -25,7 +25,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -38,11 +37,10 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useProgamAcaraFeature } from "./hook";
-import { Checkbox } from "@/components/ui/checkbox";
 import Card from "./components/card";
+import { useKabarBeritaFeature } from "./hook";
 
-const DashboardProgamAcaraFeature = () => {
+const DashboardKabarBeritaFeature = () => {
   const {
     router,
     isDialogOpen,
@@ -73,12 +71,12 @@ const DashboardProgamAcaraFeature = () => {
     mutateAdd,
     mutateEdit,
     mutateDelete,
-  } = useProgamAcaraFeature();
+  } = useKabarBeritaFeature();
 
   return (
     <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
       <div className="flex flex-col items-center justify-between sm:flex-row">
-        <h1 className="text-xl font-bold">Progam Acara</h1>
+        <h1 className="text-xl font-bold">Kabar Persada</h1>
         <div className="grid grid-cols-3 gap-5">
           <div className="relative col-span-2">
             <HiMagnifyingGlass className="absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 text-neutral-500" />
@@ -90,7 +88,7 @@ const DashboardProgamAcaraFeature = () => {
             />
           </div>
           <Button className="" onClick={handleDialogOpen}>
-            Tambah Progam Acara
+            Tambah Kabar Persada
           </Button>
         </div>
       </div>
@@ -101,11 +99,13 @@ const DashboardProgamAcaraFeature = () => {
       >
         <DialogContent className="sm:max-w-3xl">
           <DialogHeader>
-            <DialogTitle>{isEdit ? "Edit" : "Tambah"} Progam Acara</DialogTitle>
+            <DialogTitle>
+              {isEdit ? "Edit" : "Tambah"} Kabar Persada
+            </DialogTitle>
             <DialogDescription>
               {isEdit
                 ? "Silahkan edit form berikut."
-                : "Silahkan isi form berikut untuk menambahkan Progam Acara baru."}
+                : "Silahkan isi form berikut untuk menambahkan Kabar Persada baru."}
             </DialogDescription>
           </DialogHeader>
           <ScrollArea className="h-[80vh]">
@@ -146,7 +146,7 @@ const DashboardProgamAcaraFeature = () => {
                     <div className="relative flex justify-center gap-2">
                       <Image
                         src={images || "/images/placeholder.jpg"}
-                        alt="Progam Acara Created Image"
+                        alt="Kabar Persada Created Image"
                         priority
                         width={400}
                         height={400}
@@ -161,7 +161,7 @@ const DashboardProgamAcaraFeature = () => {
                         />
                         {isEdit && (
                           <ActionLivePreview
-                            href={`${ROUTES_PATH.progamAcara}`}
+                            href={`${ROUTES_PATH.kabarBerita}/${selectedItem.id}`}
                           />
                         )}
                       </div>
@@ -176,42 +176,8 @@ const DashboardProgamAcaraFeature = () => {
                       <FormLabel>Title</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="Judul Progam Acara"
+                          placeholder="Judul Kabar Persada"
                           className="border-bluePrimary"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="time"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Time</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="eg. Minggu 12:00 - 14:00 WIB"
-                          className="border-bluePrimary"
-                          {...field}
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="content"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Content</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Content Progam Acara"
-                          className="resize-y"
                           {...field}
                         />
                       </FormControl>
@@ -222,24 +188,17 @@ const DashboardProgamAcaraFeature = () => {
 
                 <FormField
                   control={form.control}
-                  name="highlight"
+                  name="content"
                   render={({ field }) => (
-                    <FormItem className="flex items-center gap-2">
+                    <FormItem>
+                      <FormLabel>Content</FormLabel>
                       <FormControl>
-                        <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
+                        <Textarea
+                          placeholder="Content Kabar Persada"
+                          className="resize-y"
+                          {...field}
                         />
                       </FormControl>
-                      <div className="space-y-1 leading-none">
-                        <FormLabel>
-                          Jadikan Progam Acara ini sebagai Highlight
-                        </FormLabel>
-                        <FormDescription>
-                          Progam Acara ini akan ditampilkan di bagian atas
-                          halaman Progam Acara.
-                        </FormDescription>
-                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -273,7 +232,7 @@ const DashboardProgamAcaraFeature = () => {
           <p className="text-center text-gray-500">Loading...</p>
         ) : data?.data.results.length === 0 ? (
           <p className="text-center text-gray-500">
-            Progam Acara tidak ditemukan
+            Kabar Persada tidak ditemukan
           </p>
         ) : (
           <>
@@ -313,7 +272,7 @@ const DashboardProgamAcaraFeature = () => {
         )}
         {selectedItem !== "" && (
           <AlertDelete
-            title="Progam Acara"
+            title="Kabar Persada"
             isDialogDeleteOpen={isDialogDeleteOpen}
             setIsDialogDeleteOpen={setIsDialogDeleteOpen}
             mutateDelete={mutateDelete}
@@ -325,4 +284,4 @@ const DashboardProgamAcaraFeature = () => {
   );
 };
 
-export default DashboardProgamAcaraFeature;
+export default DashboardKabarBeritaFeature;

@@ -1,7 +1,7 @@
 import { LuLayoutDashboard } from "react-icons/lu";
 import { GrArticle } from "react-icons/gr";
-import { FaImages } from "react-icons/fa";
-import { MdOutlineVideoCameraBack } from "react-icons/md";
+import { IoNewspaperOutline } from "react-icons/io5";
+import { IoMdImages } from "react-icons/io";
 
 import type { SidebarItems } from "@/components/layouts/dashboard-sidebar-menu";
 
@@ -10,9 +10,13 @@ export const ROUTES_PATH = {
   login: "/auth/login",
   profile: "/profile",
   progamAcara: "/program-acara",
+  kabarBerita: "/kabar-persada",
+  galeri: "/galeri",
   dashboard: {
     index: "/dashboard",
     progamAcara: "/dashboard/progam-acara",
+    kabarBerita: "/dashboard/kabar-persada",
+    galeri: "/dashboard/galeri",
     admin: "/dashboard/admin",
   },
 };
@@ -27,5 +31,15 @@ export const SIDEBAR_ITEMS: SidebarItems[] = [
     title: "Progam Acara",
     icon: GrArticle,
     href: ROUTES_PATH.dashboard.progamAcara,
+  },
+  {
+    title: "Kabar Persada",
+    icon: IoNewspaperOutline,
+    href: ROUTES_PATH.dashboard.kabarBerita,
+  },
+  {
+    title: "Galeri",
+    icon: IoMdImages,
+    href: ROUTES_PATH.dashboard.galeri,
   },
 ];
