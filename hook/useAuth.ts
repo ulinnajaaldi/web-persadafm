@@ -25,13 +25,11 @@ const useAuthStore = create<AuthState>((set) => ({
         },
       });
 
-      if (response.data.error) {
-        Cookies.remove("token");
-        return set({ data: null });
-      }
-
       set({ data: response.data });
-    } catch (error) {}
+    } catch (error) {
+      Cookies.remove("token");
+      set({ data: null });
+    }
   },
   logoutHandler: async () => {
     window.location.href = "/";

@@ -14,6 +14,9 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { useGetProgamAcara } from "@/useCase/ProgamAcaraUseCase";
 import { ProgamAcaraSection } from "./section";
+import { useGetGaleri } from "@/useCase/GaleriUseCase";
+import Link from "next/link";
+import { ROUTES_PATH } from "@/constants/routes";
 
 const HomepageFeature = () => {
   const plugin = React.useRef(
@@ -28,6 +31,12 @@ const HomepageFeature = () => {
     value,
     page,
     limit,
+  });
+
+  const { data: dataGalery, isLoading: isLoadingGalery } = useGetGaleri({
+    value: "",
+    page: 1,
+    limit: 6,
   });
 
   const HERO_CARAUSEL = [
@@ -162,39 +171,57 @@ const HomepageFeature = () => {
 
       <section className="bg-[#F7EEDD] py-10">
         <h2 className="pb-5 text-center text-3xl font-bold">Galeri</h2>
-        <div className="container flex  items-center justify-center px-20">
-          <Carousel
-            opts={{
-              align: "start",
-            }}
-            className="w-full"
-          >
-            <CarouselContent>
-              {GALERI.map((item, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="bg-white">
-                    <Image
-                      src={item.image}
-                      alt="Galeri"
-                      width={500}
-                      height={500}
-                    />
-                    <div className="p-2">
-                      <p className="line-clamp-3 text-sm font-medium">
-                        {item.description}
-                      </p>
-                    </div>
+        <div className="container flex items-center justify-center px-20">
+          {isLoadingGalery ? (
+            <div className="grid w-full grid-cols-3 gap-5">
+              {Array.from({ length: 3 }).map((_, index) => (
+                <div key={index} className="bg-white">
+                  <div className="h-[200px] w-full animate-pulse bg-gray-300"></div>
+                  <div className="space-y-2 p-2">
+                    <div className="h-4 w-3/4 animate-pulse bg-gray-300"></div>
+                    <div className="h-4 w-1/2 animate-pulse bg-gray-300"></div>
+                    <div className="h-4 w-3/4 animate-pulse bg-gray-300"></div>
                   </div>
-                </CarouselItem>
+                </div>
               ))}
-            </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
-          </Carousel>
+            </div>
+          ) : (
+            <Carousel
+              opts={{
+                align: "start",
+              }}
+              className="w-full"
+            >
+              <CarouselContent>
+                {dataGalery.data.results.map((item: any) => (
+                  <CarouselItem
+                    key={item.id}
+                    className="md:basis-1/2 lg:basis-1/3"
+                  >
+                    <div className="bg-white">
+                      <Image
+                        src={item.image}
+                        alt="Galeri"
+                        width={500}
+                        height={500}
+                      />
+                      <div className="p-2">
+                        <p className="line-clamp-3 text-sm font-medium">
+                          {item.title}
+                        </p>
+                      </div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+          )}
         </div>
         <div className="mt-8 flex items-center justify-center">
-          <Button className="bg-sky-500 px-10 hover:bg-sky-500/80">
-            LIHAT GALERI LAINNYA
+          <Button className="bg-sky-500 px-10 hover:bg-sky-500/80" asChild>
+            <Link href={ROUTES_PATH.galeri}>LIHAT GALERI LAINNYA</Link>
           </Button>
         </div>
       </section>
