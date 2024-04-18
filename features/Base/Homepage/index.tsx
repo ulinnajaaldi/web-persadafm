@@ -17,6 +17,7 @@ import { ProgamAcaraSection } from "./section";
 import { useGetGaleri } from "@/useCase/GaleriUseCase";
 import Link from "next/link";
 import { ROUTES_PATH } from "@/constants/routes";
+import { useGetKabarBerita } from "@/useCase/KabarBeritaUseCase";
 
 const HomepageFeature = () => {
   const plugin = React.useRef(
@@ -26,6 +27,12 @@ const HomepageFeature = () => {
   const [value, setValue] = React.useState("");
   const [page, setPage] = React.useState(1);
   const [limit, setLimit] = React.useState(4);
+
+  const { data: dataBerita, isLoading: isLoadingBerita } = useGetKabarBerita({
+    value: "",
+    page: 1,
+    limit: 4,
+  });
 
   const { data: dataProgam, isLoading: isLoadingProgam } = useGetProgamAcara({
     value,
@@ -53,31 +60,47 @@ const HomepageFeature = () => {
   return (
     <main>
       <section className="container">
-        <Carousel
-          plugins={[plugin.current]}
-          className="w-full"
-          onMouseEnter={plugin.current.stop}
-          onMouseLeave={plugin.current.reset}
-        >
-          <CarouselContent>
-            {HERO_CARAUSEL.map((item, index) => (
-              <CarouselItem key={index}>
-                <div className="relative flex aspect-video items-center justify-center">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={1920}
-                    height={1080}
-                    className="h-full w-full object-cover"
-                  />
-                  <h1 className="absolute text-center text-lg font-semibold text-white md:text-2xl">
-                    {item.title}
-                  </h1>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel>
+        {isLoadingBerita ? (
+          <div className="h-[200px] md:h-[500px]">
+            <div className="group relative h-full rounded-lg border p-4">
+              <div className="h-[120px] animate-pulse bg-gray-300"></div>
+              <div className="mt-2 space-y-3">
+                <div className="h-4 animate-pulse bg-gray-300 md:h-6"></div>
+                <div className="h-2 animate-pulse bg-gray-300 md:h-4"></div>
+                <div className="hidden h-4 animate-pulse bg-gray-300 md:block"></div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <Carousel
+            plugins={[plugin.current]}
+            className="w-full"
+            onMouseEnter={plugin.current.stop}
+            onMouseLeave={plugin.current.reset}
+          >
+            <CarouselContent>
+              {dataBerita?.data.results.map((item: any) => (
+                <CarouselItem key={item.id}>
+                  <div className="relative flex aspect-video items-center justify-center">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      width={1920}
+                      height={1080}
+                      className="h-full w-full object-cover"
+                    />
+                    <Link
+                      href={`${ROUTES_PATH.kabarBerita}/${item.id}`}
+                      className="absolute text-center text-lg font-semibold text-white md:text-2xl"
+                    >
+                      <h1>{item.title}</h1>
+                    </Link>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        )}
       </section>
       <section className="container py-10">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-10">
