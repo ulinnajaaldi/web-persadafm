@@ -50,39 +50,6 @@ const HomepageFeature = () => {
     },
   ];
 
-  const GALERI = [
-    {
-      image: "/images/galeri-base.png",
-      description:
-        'Bupati Sragen, dr. Kusdinar Untung Yuni Sukowati hadir sebagai narasumber program "Man Jadda Wa Jada" yang disiarkan live di Radio Persada FM, Kamis, 30 Juni 2022.',
-    },
-    {
-      image: "/images/galeri-base.png",
-      description:
-        'Bupati Sragen, dr. Kusdinar Untung Yuni Sukowati hadir sebagai narasumber program "Man Jadda Wa Jada" yang disiarkan live di Radio Persada FM, Kamis, 30 Juni 2022.',
-    },
-    {
-      image: "/images/galeri-base.png",
-      description:
-        'Bupati Sragen, dr. Kusdinar Untung Yuni Sukowati hadir sebagai narasumber program "Man Jadda Wa Jada" yang disiarkan live di Radio Persada FM, Kamis, 30 Juni 2022.',
-    },
-    {
-      image: "/images/galeri-base.png",
-      description:
-        'Bupati Sragen, dr. Kusdinar Untung Yuni Sukowati hadir sebagai narasumber program "Man Jadda Wa Jada" yang disiarkan live di Radio Persada FM, Kamis, 30 Juni 2022.',
-    },
-    {
-      image: "/images/galeri-base.png",
-      description:
-        'Bupati Sragen, dr. Kusdinar Untung Yuni Sukowati hadir sebagai narasumber program "Man Jadda Wa Jada" yang disiarkan live di Radio Persada FM, Kamis, 30 Juni 2022.',
-    },
-    {
-      image: "/images/galeri-base.png",
-      description:
-        'Bupati Sragen, dr. Kusdinar Untung Yuni Sukowati hadir sebagai narasumber program "Man Jadda Wa Jada" yang disiarkan live di Radio Persada FM, Kamis, 30 Juni 2022.',
-    },
-  ];
-
   return (
     <main>
       <section className="container">
@@ -103,7 +70,7 @@ const HomepageFeature = () => {
                     height={1080}
                     className="h-full w-full object-cover"
                   />
-                  <h1 className="absolute text-2xl font-semibold text-white">
+                  <h1 className="absolute text-center text-lg font-semibold text-white md:text-2xl">
                     {item.title}
                   </h1>
                 </div>
@@ -163,8 +130,11 @@ const HomepageFeature = () => {
           />
         </div>
         <div className="mx-auto">
-          <Button className="self-end bg-sky-500 px-10 hover:bg-sky-500/80">
-            BACA DISINI
+          <Button
+            className="self-end bg-sky-500 px-10 hover:bg-sky-500/80"
+            asChild
+          >
+            <Link href={ROUTES_PATH.jadwalAcara}>BACA DISINI</Link>
           </Button>
         </div>
       </section>

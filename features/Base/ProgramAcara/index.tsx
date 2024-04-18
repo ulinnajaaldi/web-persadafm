@@ -14,6 +14,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const ProgramAcaraFeature = () => {
   const [value, setValue] = React.useState("");
@@ -74,7 +75,7 @@ const ProgramAcaraFeature = () => {
                   key={index}
                   className="group relative h-full rounded-lg border p-4"
                 >
-                  <div className="h-[200px] overflow-hidden">
+                  <div className="h-[160px] overflow-hidden md:h-[200px]">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -144,7 +145,7 @@ const ProgramAcaraFeature = () => {
                   key={index}
                   className="group relative h-full rounded-lg border p-4"
                 >
-                  <div className="h-[200px] overflow-hidden">
+                  <div className="h-[160px] overflow-hidden md:h-[200px]">
                     <Image
                       src={item.image}
                       alt={item.title}
@@ -182,29 +183,34 @@ const ProgramAcaraFeature = () => {
         onOpenChange={(open) => setIsDialogOpen(open)}
       >
         <DialogContent className="max-w-3xl">
-          <DialogHeader>
-            <DialogTitle>{isSelected?.title}</DialogTitle>
-            <div className="space-y-5">
-              {isSelected?.highlight && (
-                <Badge variant="outline">Hightlight</Badge>
-              )}
-              <div className="h-[320px]">
-                <Image
-                  src={isSelected?.image}
-                  alt={isSelected?.title}
-                  width={500}
-                  height={500}
-                  className="h-full w-full rounded-lg object-cover"
+          <ScrollArea className="h-[80vh] md:h-auto">
+            <DialogHeader>
+              <DialogTitle>{isSelected?.title}</DialogTitle>
+              <div className="space-y-5">
+                {isSelected?.highlight && (
+                  <Badge variant="outline">Hightlight</Badge>
+                )}
+                <div className="h-[160px] md:h-[320px]">
+                  <Image
+                    src={isSelected?.image}
+                    alt={isSelected?.title}
+                    width={500}
+                    height={500}
+                    className="h-full w-full rounded-lg object-cover"
+                  />
+                </div>
+                <p className="text-justify text-sm font-medium md:text-base">
+                  Jadwal: {isSelected?.time}
+                </p>
+                <DialogDescription
+                  className="text-justify"
+                  dangerouslySetInnerHTML={{
+                    __html: isSelected?.content.replace(/\n/g, "<br />"),
+                  }}
                 />
               </div>
-              <p className="font-medium">Jadwal: {isSelected?.time}</p>
-              <DialogDescription
-                dangerouslySetInnerHTML={{
-                  __html: isSelected?.content.replace(/\n/g, "<br />"),
-                }}
-              />
-            </div>
-          </DialogHeader>
+            </DialogHeader>
+          </ScrollArea>
         </DialogContent>
       </Dialog>
     </main>

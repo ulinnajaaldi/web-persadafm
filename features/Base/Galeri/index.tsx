@@ -82,7 +82,7 @@ const GaleriFeature = () => {
                     />
                     <div className="absolute left-0 top-0 h-full w-full bg-white/30" />
                   </div>
-                  <h3 className="absolute top-1/2 translate-y-40 px-5 text-center text-2xl font-semibold text-white/90 opacity-0 drop-shadow-md transition-all duration-300 ease-in-out group-hover:-translate-y-1/2 group-hover:opacity-100">
+                  <h3 className="absolute top-1/2 translate-y-40 px-5 text-center text-base font-semibold text-white/90 opacity-0 drop-shadow-md transition-all duration-300 ease-in-out group-hover:-translate-y-1/2 group-hover:opacity-100 md:text-2xl">
                     {item.title}
                   </h3>
                 </div>

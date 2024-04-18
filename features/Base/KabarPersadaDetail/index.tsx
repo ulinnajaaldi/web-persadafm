@@ -17,7 +17,7 @@ const KabarPersadaDetailFeature = ({ params }: { params: { id: string } }) => {
     return (
       <main className="container my-10 grid grid-cols-1 gap-10 md:grid-cols-4">
         <section className="col-span-3 space-y-4">
-          <div className="h-[400px]">
+          <div className="h-[200px] md:h-[400px]">
             <div className="h-full w-full animate-pulse bg-gray-300"></div>
           </div>
           <div className="flex items-center justify-between">
@@ -51,8 +51,8 @@ const KabarPersadaDetailFeature = ({ params }: { params: { id: string } }) => {
 
   return (
     <main className="container my-10 grid grid-cols-1 gap-10 md:grid-cols-4">
-      <section className="col-span-3 space-y-4">
-        <div className="h-[400px]">
+      <section className="space-y-4 md:col-span-3">
+        <div className="h-[200px] md:h-[400px]">
           <Image
             src={data?.data?.image}
             alt={data?.data?.title}
@@ -67,9 +67,11 @@ const KabarPersadaDetailFeature = ({ params }: { params: { id: string } }) => {
           </p>
           <Badge className="bg-sky-500">Kabar Persada</Badge>
         </div>
-        <h1 className="text-3xl font-semibold">{data?.data?.title}</h1>
+        <h1 className="text-xl font-semibold md:text-3xl">
+          {data?.data?.title}
+        </h1>
         <p
-          className="text-justify"
+          className="text-justify text-sm md:text-base"
           dangerouslySetInnerHTML={{
             __html: data?.data?.content.replace(/\n/g, "<br />"),
           }}

@@ -51,7 +51,7 @@ const KabarPersadaFeature = () => {
           </h2>
           {isLoadingKabarBerita ? (
             <div className="group relative h-full rounded-lg border p-4">
-              <div className="h-[467px] overflow-hidden">
+              <div className="h-[200px] overflow-hidden md:h-[467px]">
                 <div className="h-full w-full animate-pulse bg-gray-300"></div>
               </div>
               <div className="mt-2 space-y-3">
@@ -62,8 +62,8 @@ const KabarPersadaFeature = () => {
               </div>
             </div>
           ) : (
-            <div className="rounded-lg border p-5">
-              <div className="h-[467px]">
+            <div className="rounded-lg border p-2 md:p-5">
+              <div className="h-[200px] md:h-[467px]">
                 <Image
                   src={newKabarBeita.image}
                   alt={newKabarBeita.title}
@@ -73,8 +73,10 @@ const KabarPersadaFeature = () => {
                 />
               </div>
               <div className="flex flex-col gap-2 pb-4 pt-2 ">
-                <p>{convertDate(newKabarBeita.createdAt)}</p>
-                <h3 className="text-justify text-lg font-semibold md:text-xl">
+                <p className="text-sm md:text-base">
+                  {convertDate(newKabarBeita.createdAt)}
+                </p>
+                <h3 className="text-justify text-base font-semibold md:text-xl">
                   {newKabarBeita.title}
                 </h3>
                 <p
@@ -117,10 +119,10 @@ const KabarPersadaFeature = () => {
           </div>
         ) : (
           <>
-            <div className="grid grid-cols-3">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-10 xl:grid-cols-3">
               {dataKabarBerita?.data?.results.slice(1, 12).map((item: any) => (
                 <div key={item.id} className="space-y-1 rounded-md border p-3">
-                  <div className="h-[200px]">
+                  <div className="h-[140px] md:h-[200px]">
                     <Image
                       src={item.image}
                       alt={item.title}

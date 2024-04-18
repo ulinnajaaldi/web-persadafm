@@ -53,44 +53,45 @@ const JadwalAcaraFeature = () => {
         <h1 className="mb-5 pb-5 text-center text-xl font-bold sm:text-3xl md:text-4xl">
           Jadwal Acara Hari Ini
         </h1>
-
-        <Table className="min-w-full divide-y divide-gray-200">
-          <TableCaption className="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-gray-500">
-            Daftar acara pada hari ini{" "}
-            <span className="font-semibold text-gray-900">{today}</span>
-          </TableCaption>
-          <TableHeader>
-            <TableRow className="bg-gray-50">
-              <TableHead className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                Jam
-              </TableHead>
-              <TableHead className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                Nama Acara
-              </TableHead>
-              <TableHead className="w-full px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 md:w-[400px]">
-                Keterangan
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody className="divide-y divide-gray-200 bg-white">
-            {dateNow[0].events.map((item: any, index: number) => (
-              <TableRow key={index}>
-                <TableCell className="whitespace-nowrap px-6 py-4 font-medium">
-                  {item.hours}
-                </TableCell>
-                <TableCell className="whitespace-nowrap px-6 py-4">
-                  {item.name}
-                </TableCell>
-                <TableCell
-                  className="whitespace-nowrap px-6 py-4"
-                  dangerouslySetInnerHTML={{
-                    __html: item.description.replace(/\n/g, "<br />"),
-                  }}
-                ></TableCell>
+        <div className="w-full overflow-x-auto">
+          <Table className="min-w-full divide-y divide-gray-200">
+            <TableCaption className="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider text-gray-500">
+              Daftar acara pada hari ini{" "}
+              <span className="font-semibold text-gray-900">{today}</span>
+            </TableCaption>
+            <TableHeader>
+              <TableRow className="bg-gray-50">
+                <TableHead className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  Jam
+                </TableHead>
+                <TableHead className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                  Nama Acara
+                </TableHead>
+                <TableHead className="w-full px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 md:w-[400px]">
+                  Keterangan
+                </TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody className="divide-y divide-gray-200 bg-white">
+              {dateNow[0].events.map((item: any, index: number) => (
+                <TableRow key={index}>
+                  <TableCell className="whitespace-nowrap px-6 py-4 font-medium">
+                    {item.hours}
+                  </TableCell>
+                  <TableCell className="whitespace-nowrap px-6 py-4">
+                    {item.name}
+                  </TableCell>
+                  <TableCell
+                    className="whitespace-nowrap px-6 py-4"
+                    dangerouslySetInnerHTML={{
+                      __html: item.description.replace(/\n/g, "<br />"),
+                    }}
+                  ></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
       </section>
 
       <section className="container my-10">
@@ -98,7 +99,7 @@ const JadwalAcaraFeature = () => {
           Jadwal Acara Dihari Lainnya
         </h1>
 
-        <div className="grid grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-10">
           {otherDay.map((item: any, index: number) => (
             <div
               key={index}
@@ -118,45 +119,47 @@ const JadwalAcaraFeature = () => {
 
         {isSelected && (
           <Dialog open={isOpen} onOpenChange={(isOpen) => setIsOpen(isOpen)}>
-            <DialogContent className="sm:max-w-4xl">
-              <DialogHeader>
-                <DialogTitle>JADWAL ACARA HARI {isSelected.day}</DialogTitle>
-              </DialogHeader>
-              <ScrollArea className="h-[80vh]">
-                <Table className="min-w-full divide-y divide-gray-200">
-                  <TableHeader>
-                    <TableRow className="bg-gray-50">
-                      <TableHead className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                        Jam
-                      </TableHead>
-                      <TableHead className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
-                        Nama Acara
-                      </TableHead>
-                      <TableHead className="w-full px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 md:w-[400px]">
-                        Keterangan
-                      </TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody className="divide-y divide-gray-200 bg-white">
-                    {isSelected.events.map((item: any, index: number) => (
-                      <TableRow key={index}>
-                        <TableCell className="whitespace-nowrap px-6 py-4 font-medium">
-                          {item.hours}
-                        </TableCell>
-                        <TableCell className="whitespace-nowrap px-6 py-4">
-                          {item.name}
-                        </TableCell>
-                        <TableCell
-                          className="whitespace-nowrap px-6 py-4"
-                          dangerouslySetInnerHTML={{
-                            __html: item.description.replace(/\n/g, "<br />"),
-                          }}
-                        ></TableCell>
+            <DialogContent className="w-full overflow-x-scroll sm:max-w-4xl">
+              <div className="min-w-max">
+                <DialogHeader>
+                  <DialogTitle>JADWAL ACARA HARI {isSelected.day}</DialogTitle>
+                </DialogHeader>
+                <ScrollArea className="h-[80vh]">
+                  <Table className="min-w-full divide-y divide-gray-200">
+                    <TableHeader>
+                      <TableRow className="bg-gray-50">
+                        <TableHead className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                          Jam
+                        </TableHead>
+                        <TableHead className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500">
+                          Nama Acara
+                        </TableHead>
+                        <TableHead className="w-full px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 md:w-[400px]">
+                          Keterangan
+                        </TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </ScrollArea>
+                    </TableHeader>
+                    <TableBody className="divide-y divide-gray-200 bg-white">
+                      {isSelected.events.map((item: any, index: number) => (
+                        <TableRow key={index}>
+                          <TableCell className="whitespace-nowrap px-6 py-4 font-medium">
+                            {item.hours}
+                          </TableCell>
+                          <TableCell className="whitespace-nowrap px-6 py-4">
+                            {item.name}
+                          </TableCell>
+                          <TableCell
+                            className="whitespace-nowrap px-6 py-4"
+                            dangerouslySetInnerHTML={{
+                              __html: item.description.replace(/\n/g, "<br />"),
+                            }}
+                          ></TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </ScrollArea>
+              </div>
             </DialogContent>
           </Dialog>
         )}

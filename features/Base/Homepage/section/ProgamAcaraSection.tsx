@@ -4,6 +4,8 @@ import { IoCalendarClearOutline } from "react-icons/io5";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ROUTES_PATH } from "@/constants/routes";
 
 interface ProgamAcaraSectionProps {
   isLoading: boolean;
@@ -14,6 +16,7 @@ const ProgamAcaraSection: React.FC<ProgamAcaraSectionProps> = ({
   isLoading,
   data,
 }) => {
+  const router = useRouter();
   return (
     <section className="bg-[#F7EEDD] py-10">
       <h2 className="pb-5 text-center text-xl font-bold md:text-3xl">
@@ -49,7 +52,12 @@ const ProgamAcaraSection: React.FC<ProgamAcaraSectionProps> = ({
         </div>
       ) : (
         <div className="container relative grid grid-cols-1 gap-10 md:grid-cols-2">
-          <div className="rounded-lg bg-white">
+          <div
+            className="group cursor-pointer rounded-lg bg-white"
+            onClick={() => {
+              router.push(`${ROUTES_PATH.progamAcara}`);
+            }}
+          >
             <div className="h-56 md:h-[300px]">
               <Image
                 src={data?.data?.results[0].image}
@@ -60,7 +68,7 @@ const ProgamAcaraSection: React.FC<ProgamAcaraSectionProps> = ({
               />
             </div>
             <div className="flex flex-col gap-3 px-5 pb-4 pt-2 md:px-10">
-              <h3 className="text-lg font-semibold md:text-xl">
+              <h3 className="text-lg font-semibold transition-colors group-hover:text-sky-500 md:text-xl">
                 {data?.data?.results[0].title}
               </h3>
               <div className="flex items-start gap-1 text-sm font-medium md:text-base">
@@ -74,7 +82,13 @@ const ProgamAcaraSection: React.FC<ProgamAcaraSectionProps> = ({
           </div>
           <div className="flex flex-col gap-4">
             {data?.data?.results.slice(1, 4).map((item: any, index: number) => (
-              <div key={index} className="rounded-lg bg-white">
+              <div
+                key={index}
+                className="group cursor-pointer rounded-lg bg-white"
+                onClick={() => {
+                  router.push(`${ROUTES_PATH.progamAcara}`);
+                }}
+              >
                 <div className="grid h-[120px] max-h-[120px] grid-cols-5 md:grid-cols-3">
                   <div className="relative col-span-3 md:col-span-1">
                     <Image
@@ -87,7 +101,7 @@ const ProgamAcaraSection: React.FC<ProgamAcaraSectionProps> = ({
                   </div>
 
                   <div className="col-span-2 flex flex-col items-start justify-center gap-2 px-2">
-                    <h3 className="text-base font-semibold uppercase md:text-lg">
+                    <h3 className="text-base font-semibold uppercase transition-colors group-hover:text-sky-500 md:text-lg">
                       {item.title}
                     </h3>
                     <div className="flex items-start gap-1 text-xs font-medium md:items-center md:text-base ">
