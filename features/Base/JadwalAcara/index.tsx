@@ -124,7 +124,7 @@ const JadwalAcaraFeature = () => {
                 <DialogHeader>
                   <DialogTitle>JADWAL ACARA HARI {isSelected.day}</DialogTitle>
                 </DialogHeader>
-                <ScrollArea className="h-[80vh]">
+                <ScrollArea className="h-[80vh] pt-2 md:pt-5">
                   <Table className="min-w-full divide-y divide-gray-200">
                     <TableHeader>
                       <TableRow className="bg-gray-50">

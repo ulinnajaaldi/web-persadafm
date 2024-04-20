@@ -3,8 +3,9 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import DashboardNavbar from "./dashboard-navbar";
+
 import { ROUTES_PATH } from "@/constants/routes";
+import DashboardNavbar from "./dashboard-navbar";
 
 const DashboardHeader: React.FC = () => {
   return (

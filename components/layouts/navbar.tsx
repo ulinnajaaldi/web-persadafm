@@ -33,6 +33,10 @@ const Navbar = () => {
     return pathname === href ? "text-teal-200" : "text-white";
   };
 
+  const isActiveMobile = (href: string) => {
+    return pathname === href ? "text-sky-400" : "";
+  };
+
   const HEADER_DATA = [
     {
       text: "(0271) 638 123",
@@ -182,7 +186,10 @@ const Navbar = () => {
               <SheetDescription>
                 <ul className="flex flex-col gap-3">
                   {NAVBAR_DATA.map((item, index) => (
-                    <li key={index} className="py-1 font-semibold uppercase">
+                    <li
+                      key={index}
+                      className={`py-1 font-semibold uppercase ${isActiveMobile(item.href)}`}
+                    >
                       <Link href={item.href}>{item.text}</Link>
                     </li>
                   ))}

@@ -135,6 +135,20 @@ const HomepageFeature = () => {
                 LIVE STREAMING
               </h2>
             </div>
+            <div className="flex flex-col gap-5 md:gap-10">
+              <ul className="list-inside list-disc p-5 text-sm font-medium md:text-base">
+                <li>
+                  <a
+                    href="https://mtamedia.net:1079/;stream.nsv"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="ml-2 transition-colors hover:text-sky-400"
+                  >
+                    LIVE MTMEDIA.net
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>

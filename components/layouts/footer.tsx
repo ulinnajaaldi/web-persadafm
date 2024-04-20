@@ -111,7 +111,7 @@ const Footer = () => {
                     href={content.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="pb-1"
+                    className="pb-1 transition-colors hover:text-sky-400"
                   >
                     {content.title}
                   </a>

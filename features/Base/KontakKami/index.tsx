@@ -1,11 +1,58 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import { toast } from "@/components/ui/use-toast";
 
 const KontakKamiFeature = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (e: any) => {
+    setFormData({ ...formData, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const formDataSend = new FormData();
+
+    formDataSend.append("name", formData.name);
+    formDataSend.append("email", formData.email);
+    formDataSend.append("subject", formData.subject);
+    formDataSend.append("message", formData.message);
+
+    const response = await fetch("/api/mail", {
+      method: "POST",
+      body: formDataSend,
+    });
+
+    if (response.ok) {
+      toast({
+        title: "Success",
+        description: "Email sent successfully",
+      });
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } else {
+      toast({
+        title: "Error",
+        description: "Email failed to send",
+      });
+    }
+  };
+
   return (
     <main>
       <section className="container my-10">
@@ -24,14 +71,16 @@ const KontakKamiFeature = () => {
                   Silahkan hubungi kami untuk informasi lebih lanjut.
                 </p>
               </div>
-              <form
-                action="mailto:info@example.com?subject=New%20Message&body="
-                className="space-y-4"
-                method="get"
-              >
+              <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Nama</Label>
-                  <Input id="name" placeholder="eg. John Doe" required />
+                  <Input
+                    id="name"
+                    placeholder="eg. John Doe"
+                    onChange={handleChange}
+                    value={formData.name || ""}
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
@@ -39,6 +88,8 @@ const KontakKamiFeature = () => {
                     id="email"
                     placeholder="eg. john@gmail.com"
                     required
+                    onChange={handleChange}
+                    value={formData.email || ""}
                     type="email"
                   />
                 </div>
@@ -47,6 +98,8 @@ const KontakKamiFeature = () => {
                   <Input
                     id="subject"
                     placeholder="subject untuk pesan"
+                    onChange={handleChange}
+                    value={formData.subject || ""}
                     required
                   />
                 </div>
@@ -55,6 +108,8 @@ const KontakKamiFeature = () => {
                   <Textarea
                     className="min-h-[120px]"
                     id="message"
+                    onChange={handleChange}
+                    value={formData.message || ""}
                     placeholder="Masukan pesan"
                     required
                   />
