@@ -206,12 +206,15 @@ const HomepageFeature = () => {
                     className="md:basis-1/2 lg:basis-1/3"
                   >
                     <div className="bg-white">
-                      <Image
-                        src={item.image}
-                        alt="Galeri"
-                        width={500}
-                        height={500}
-                      />
+                      <div className="relative h-[200px] bg-white">
+                        <Image
+                          src={item.image}
+                          alt="Galeri"
+                          width={500}
+                          height={500}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
                       <div className="p-2">
                         <p className="line-clamp-3 text-sm font-medium">
                           {item.title}
