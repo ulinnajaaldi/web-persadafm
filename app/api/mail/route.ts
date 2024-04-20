@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
-import { MAIL_PASS, MAIL_USER } from "@/constants/config";
-
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
   const name = formData.get("name");
@@ -15,15 +13,15 @@ export async function POST(request: NextRequest) {
     port: 587,
     secure: false,
     auth: {
-      user: MAIL_USER,
-      pass: MAIL_PASS,
+      user: process.env.NEXT_PUBLIC_EMAIL_USER,
+      pass: process.env.NEXT_PUBLIC_EMAIL_PASS,
     },
   });
 
   try {
     const mail = transporter.sendMail({
       from: email as string,
-      to: MAIL_USER,
+      to: process.env.NEXT_PUBLIC_EMAIL_USER,
       subject: subject as string,
       text: message as string,
       html: `
