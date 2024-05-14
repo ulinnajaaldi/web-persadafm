@@ -103,12 +103,12 @@ const HomepageFeature = () => {
         )}
       </section>
       <section className="container py-10">
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-10">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-1 md:gap-10">
           <div className="space-y-3">
             <h2 className="pb-2 text-xl font-bold md:text-3xl">
               PROFIL PERSADA FM
             </h2>
-            <div className="h-[280px]">
+            <div className="h-[280px] md:h-[500px]">
               <Image
                 src="/images/profil-persada-fm.png"
                 alt="Profil Persada FM"
@@ -129,7 +129,7 @@ const HomepageFeature = () => {
               di masa sekarang maupun akan daring.
             </p>
           </div>
-          <div className="bg-[#F7EEDD]">
+          {/* <div className="bg-[#F7EEDD]">
             <div className="flex h-9 w-full items-center justify-center bg-sky-400 md:h-[52px]">
               <h2 className="pb-2 text-lg font-medium md:text-2xl">
                 LIVE STREAMING
@@ -149,7 +149,7 @@ const HomepageFeature = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 
