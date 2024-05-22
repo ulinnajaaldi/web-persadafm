@@ -125,7 +125,7 @@ const KontakKamiFeature = () => {
           </div>
 
           <div className="flex flex-col gap-10">
-            <div>
+            {/* <div>
               <h1>
                 <span className="bg-sky-500 px-10 py-2 text-white">
                   Media Sosial
@@ -145,9 +145,9 @@ const KontakKamiFeature = () => {
                   <p>Youtube : 102,2 Persada FM</p>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="flex flex-col gap-2">
-              <h1>
+              <h1 className="pb-2 md:pb-5">
                 <span className="bg-sky-500 px-10 py-2 text-white">
                   Maps Persada FM
                 </span>
